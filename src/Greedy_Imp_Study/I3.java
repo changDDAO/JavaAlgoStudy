@@ -12,14 +12,14 @@ public class I3 {
     //3. 입력받은 맵에서 0은 육지이고 1은 바다이다.
     public static int [][] map = new int[50][50];// 맵초기화
     public static int [][] wentMap = new int[50][50];// 가본위치 표시
-    public static int n, m, seeDir;//행과 열
-    public static int[] dx = {-1,0,1,0};//북 서 남 동
-    public static int[] dy = {0,-1,0,1};//북 서 남 동
+    public static int n, m, seeDir;//행과 열 그리고 보고있는방향을 담는 변수
+    public static int[] dx = {-1,0,1,0};//북 동 남 서
+    public static int[] dy = {0,1,0,-1};//북 동 남 서
 
     public static void turnLeft(){
-        seeDir+=1;
-        if(seeDir==4)
-            seeDir=0;
+        seeDir-=1;
+        if(seeDir==-1)
+            seeDir=3;
     }
 
     public static void main(String[] args) throws IOException {
