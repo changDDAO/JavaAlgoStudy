@@ -11,25 +11,28 @@ public class Greedy04 {
 
         int cnt = 0;
 
-        while(N != 1) {
-            if (N % K == 0) {
-                while (true) {
-                    if (N % K != 0) {
-                        break;
-                    }
+        while (true) {
+            if (N == 1)
+                break;
 
-                    if (N == 1) {
+            if (N % K == 0) // N이 K로 나누어 떨어질 경우 최우선 수행(횟수를 최소)
+            {
+                while (true) {
+                    if (N % K != 0)
                         break;
-                    }
+
+                    if (N == 1)
+                        break;
 
                     N /= K;
                     cnt++;
                 }
-            } else {
-                N -= 1;
-                cnt++;
 
+                continue;
             }
+
+            N -= 1;
+            cnt++;
         }
 
         System.out.println(cnt);
