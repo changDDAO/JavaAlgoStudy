@@ -16,6 +16,8 @@ public class G2 {
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
         k = Integer.parseInt(st.nextToken());
+        long start = System.currentTimeMillis();
+
         s = br.readLine();
         String [] temp = s.split(" ");
         int []inputNums = Arrays.stream(temp).mapToInt(Integer::parseInt).toArray();
@@ -37,6 +39,8 @@ public class G2 {
           m-=1;
       }
         System.out.println(answer);
+        long end = System.currentTimeMillis();
+        System.out.println(end-start);
 
 
     }
