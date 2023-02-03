@@ -44,7 +44,7 @@ public class Practice4_BFS {
                 nx = a+dx[i];
                 ny = b+dy[i];
                 if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue; //범위를 벗어나는 경우, 건너뛰기
-                if (graph[nx][ny] == 1) {
+                if (graph[nx][ny] == 1) {//이동할수있다면 이동하고 이동한 position의 값 갱신
                     graph[nx][ny]=graph[a][b]+1;
                     queue.add(new curPos(nx,ny));
                 }
