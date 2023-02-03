@@ -36,7 +36,7 @@ public class Implementation01 {
             else if (s.equals("D"))
                 newX++;
 
-            if (newX > 5 || newX < 1 || newY > 5 || newY < 1)
+            if (newX > N || newX < 1 || newY > N || newY < 1)
                 continue;
             else
                 x = newX;
