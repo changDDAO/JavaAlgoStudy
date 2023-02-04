@@ -3,7 +3,6 @@ package DFS_BFS_Sort;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,9 @@ public class Practice4_Sort {
         Collections.sort(arrA);// 오름차순 정렬
         arrB.sort(Collections.reverseOrder()); //내림차순 정렬
         for(int i=0;i<k;i++){
-            arrA.set(i, arrB.get(i)); //arrA의 k-1번째 인덱스까지 값변경(arrA[i]=arrB[i])가 된다고 생각하면됨
+            if (arrA.get(i) < arrB.get(i)) {
+                arrA.set(i, arrB.get(i)); //arrA의 k-1번째 인덱스까지 값변경(arrA[i]=arrB[i])가 된다고 생각하면됨
+            }
         }
 
         int answer =arrA.stream().mapToInt(i->i).sum();
