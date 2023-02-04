@@ -26,7 +26,6 @@ public class DBFS04 {
 
         map = new int[N][M];
         int result = 0;
-
         for (int i = 0; i < N; i++) {
             s = br.readLine();
 
@@ -35,6 +34,7 @@ public class DBFS04 {
                 map[i][j] = tmp;
             }
         }
+        long end = System.currentTimeMillis();
 
         bfs(0, 0);
         System.out.println(map[N - 1][M - 1]);

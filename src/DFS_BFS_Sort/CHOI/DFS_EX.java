@@ -54,6 +54,6 @@ public class DFS_EX {
     }
 
     public static void main(String[] args) {
-        new BFS_EX();
+        new DFS_EX();
     }
 }
