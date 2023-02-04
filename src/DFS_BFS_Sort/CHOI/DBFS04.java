@@ -33,6 +33,7 @@ public class DBFS04 {
                 map[i][j] = tmp;
             }
         }
+        long end = System.currentTimeMillis();
 
         br.close();
 
