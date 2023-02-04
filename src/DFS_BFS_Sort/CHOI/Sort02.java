@@ -13,6 +13,7 @@ public class Sort02 {
     public void init() { // 입력 받기와 배열 생성
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
+
         list = new int[n];
 
         for (int i = 0; i < n; i++) {
@@ -28,7 +29,6 @@ public class Sort02 {
                 list[j] = swap(list[j - 1], list[j - 1] = list[j]); // 스왑
             }
         }
-
     }
 
     public static int swap(int x, int y) {

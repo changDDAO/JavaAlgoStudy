@@ -4,13 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
-import java.util.Scanner;
 
 public class Sort03 {
     private ArrayList<Student> list;
-    private class Student {
-        private String name;
+    private static class Student {
+        private final String name;
         int score;
 
         public Student(String name, int score) {
@@ -30,17 +30,11 @@ public class Sort03 {
     public Sort03() throws IOException {
         init();
 
-        list.sort(new Comparator<Student>() { // collection 정렬 : comparable 사용
-            @Override
-            public int compare(Student o1, Student o2) {
-                return o1.getScore() - o2.getScore(); // 성적 기준 오름차순으로 정렬
-            }
-        });
+        list.sort(Comparator.comparingInt(Student::getScore));
 
         for (Student st : list) { // 학생 이름 출력
             System.out.print(st.getName() + " ");
         }
-
     }
 
     public void init() throws IOException {
