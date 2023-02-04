@@ -8,45 +8,35 @@ import java.util.Comparator;
 
 public class Sort04 {
     private int K;
-    private ArrayList<Integer> arr1 = new ArrayList<>();
-    private ArrayList<Integer> arr2 = new ArrayList<>();
+    private final ArrayList<Integer> arr1 = new ArrayList<>();
+    private final ArrayList<Integer> arr2 = new ArrayList<>();
 
     public Sort04() throws IOException {
         init();
+        sorting();
+
         for (int i = 0; i < K; i++) {
-            sorting();
-            swap();
+            if (arr1.get(i) < arr2.get(i))
+                swap(i);
         }
 
         int result = 0;
 
-        for (int i : arr1) {
+        for (int i : arr1)
             result += i;
-        }
 
         System.out.println(result);
     }
 
-    public void swap() { // 바꿔치기 스왑
-        int tmp = arr1.get(0);
-        arr1.set(0, arr2.get(0));
-        arr2.set(0, tmp);
+    public void swap(int pos) { // 바꿔치기 스왑
+        int tmp = arr1.get(pos);
+        arr1.set(pos, arr2.get(pos));
+        arr2.set(pos, tmp);
     }
 
     public void sorting() {
-        arr1.sort(new Comparator<Integer>() { // A 배열 오름차순으로 정렬
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1 - o2;
-            }
-        });
-
-        arr2.sort(new Comparator<Integer>() { // B 배열 내림차순으로 정렬
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2 - o1;
-            }
-        });
+        arr1.sort(Comparator.comparingInt(o -> o));
+        arr2.sort((o1, o2) -> o2 - o1);
     }
 
     public void init() throws IOException {
@@ -71,6 +61,8 @@ public class Sort04 {
 
         for (String t : input)
             arr2.add(Integer.parseInt(t));
+
+        br.close();
     }
 
     public static void main(String[] args) throws IOException {
