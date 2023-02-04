@@ -3,17 +3,16 @@ package DFS_BFS_Sort.CHOI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.PublicKey;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class DBFS04 {
-    private int N, M;
-    private int[][] map; // 인접 행렬 사용 => 2차원 행렬 => 인접 리스트보다 빠른 접근
+    private final int N, M;
+    private final int[][] map; // 인접 행렬 사용 => 2차원 행렬 => 인접 리스트보다 빠른 접근
 
     // 한 번에 한 칸 이동
-    private int[] dx = {-1, 0, 0, 1};
-    private int[] dy = {0, -1, 1, 0};
+    private final int[] dx = {-1, 0, 0, 1};
+    private final int[] dy = {0, -1, 1, 0};
 
     public DBFS04() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,7 +24,6 @@ public class DBFS04 {
         M = Integer.parseInt(line[1]);
 
         map = new int[N][M];
-        int result = 0;
 
         for (int i = 0; i < N; i++) {
             s = br.readLine();
@@ -36,16 +34,19 @@ public class DBFS04 {
             }
         }
 
+        br.close();
+
         bfs(0, 0);
         System.out.println(map[N - 1][M - 1]);
     }
 
     public void bfs(int x, int y) {
+        int[] tmp;
         Queue<int[]> q = new LinkedList<>();
         q.offer(new int[]{x, y}); // 좌표 배열 큐에 넣기
 
         while (!q.isEmpty()) {
-            int[] tmp = q.poll();
+            tmp = q.poll();
 
             x = tmp[0];
             y = tmp[1];

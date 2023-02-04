@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class DBFS03 {
-    private int N, M;
-    private int[][] map; // 인접 행렬 사용 => 2차원 행렬 => 인접 리스트보다 빠른 접근
+    private final int N, M;
+    private final int[][] map; // 인접 행렬 사용 => 2차원 행렬 => 인접 리스트보다 빠른 접근
 
     public DBFS03() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -37,17 +37,16 @@ public class DBFS03 {
             }
         }
 
+        br.close();
+
         System.out.println(result);
     }
 
     public boolean dfs(int x, int y) {
-        if (x < 0 || y < 0 || x >= N || y >= M) // 좌표가 지도 밖을 넘어가는지 검사
+        if (dfsCheck(x, y))
             return false;
 
-        if (map[x][y] != 0) // 방문한 좌표인지 검사
-            return false;
-
-        map[x][y] = 1;
+        map[x][y] = 1; // 방문 처리
 
         dfs(x - 1, y);
         dfs(x + 1, y);
@@ -55,6 +54,16 @@ public class DBFS03 {
         dfs(x, y + 1);
 
         return true;
+    }
+
+    public boolean dfsCheck(int x, int y) {
+        if (x < 0 || y < 0 || x >= N || y >= M) // 좌표가 지도 밖을 넘어가는지 검사
+            return true;
+
+        if (map[x][y] != 0) // 방문한 좌표인지 검사
+            return true;
+
+        return false;
     }
 
     public static void main(String[] args) throws IOException {
