@@ -22,8 +22,11 @@ public class Practice4_Sort {
         s = br.readLine();
         input = s.split(" ");
         arrB =  Arrays.stream(input).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
-        Collections.sort(arrA);// 오름차순 정렬
+        //Collections.sort(arrA);// 오름차순 정렬
+        arrA.sort((a,b)-> a-b);
+        System.out.println("arrA = " + arrA);
         arrB.sort(Collections.reverseOrder()); //내림차순 정렬
+        System.out.println("arrB = " + arrB);
         for(int i=0;i<k;i++){
             if (arrA.get(i) < arrB.get(i)) {
                 arrA.set(i, arrB.get(i)); //arrA의 k-1번째 인덱스까지 값변경(arrA[i]=arrB[i])가 된다고 생각하면됨
