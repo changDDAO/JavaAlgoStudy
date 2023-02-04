@@ -1,8 +1,9 @@
+package BinarySearch_DynamicProgramming;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +37,7 @@ public class Practice2_BS {
 
     public Practice2_BS() throws IOException {
         input();
-        srcList.sort(Comparator.comparingInt(a -> a));//오름차순 정렬
+        srcList.sort((a,b) -> a-b);//오름차순 정렬
         for (int i = 0; i < targetList.size(); i++) {
             if(biSearch(srcList,targetList.get(i),0,srcList.size()-1))
             System.out.print("yes ");
