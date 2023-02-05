@@ -38,9 +38,9 @@ public class Practice2_BS {
     public Practice2_BS() throws IOException {
         input();
         srcList.sort((a,b) -> a-b);//오름차순 정렬
-        for (int i = 0; i < targetList.size(); i++) {
-            if(biSearch(srcList,targetList.get(i),0,srcList.size()-1))
-            System.out.print("yes ");
+        for (Integer target : targetList) {
+            if (biSearch(srcList, target, 0, srcList.size() - 1))
+                System.out.print("yes ");
             else System.out.print("no ");
         }
     }
