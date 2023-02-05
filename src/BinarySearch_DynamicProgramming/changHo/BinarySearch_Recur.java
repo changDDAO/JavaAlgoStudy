@@ -1,4 +1,4 @@
-package BinarySearch_DynamicProgramming;
+package BinarySearch_DynamicProgramming.changHo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
