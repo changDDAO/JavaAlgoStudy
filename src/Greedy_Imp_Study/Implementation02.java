@@ -7,6 +7,8 @@ public class Implementation02 {
         Scanner sc = new Scanner(System.in);
         String input = sc.next();
 
+        sc.close();
+
         int x = input.charAt(0) - 'a' + 1;
         int y = input.charAt(1) - '0';
 

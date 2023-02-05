@@ -34,6 +34,8 @@ public class Greedy03 {
             tmp.clear();
         }
 
+        br.close();
+
         lastList.sort(Collections.reverseOrder());
 
         System.out.println(lastList.getFirst());
