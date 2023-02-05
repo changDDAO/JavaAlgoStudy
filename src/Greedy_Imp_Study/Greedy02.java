@@ -22,6 +22,8 @@ public class Greedy02 {
         s = br.readLine();
         line = s.split(" ");
 
+        br.close();
+
         int[] input = Stream.of(line).mapToInt(Integer::parseInt).toArray();
         Arrays.sort(input);
 

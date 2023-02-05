@@ -9,6 +9,8 @@ public class Greedy04 {
         int N = sc.nextInt();
         int K = sc.nextInt();
 
+        sc.close();
+
         int cnt = 0;
 
         while (true) {

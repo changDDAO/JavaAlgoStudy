@@ -55,6 +55,9 @@ public class Implementation03 {
                 map[i][j] = Integer.parseInt(line[j]);
             }
         }
+
+        br.close();
+
         int seaCnt = 0;
         int cnt = 1;
         visited[userY][userX] = 1;

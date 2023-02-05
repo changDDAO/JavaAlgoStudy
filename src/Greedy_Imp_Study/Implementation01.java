@@ -23,6 +23,8 @@ public class Implementation01 {
             input.add(s);
         }
 
+        sc.close();
+
         for (String s : input) {
             newX = x;
             newY = y;
