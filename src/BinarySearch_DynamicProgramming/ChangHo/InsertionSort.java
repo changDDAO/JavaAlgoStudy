@@ -1,4 +1,4 @@
-package BinarySearch_DynamicProgramming.changHo;
+package BinarySearch_DynamicProgramming.ChangHo;
 
 public class InsertionSort {
     public static void main(String[] args) {
