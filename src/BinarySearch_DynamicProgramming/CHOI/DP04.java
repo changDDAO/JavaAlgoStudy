@@ -1,10 +1,7 @@
 package BinarySearch_DynamicProgramming.CHOI;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class DP04 {
     private int N;
