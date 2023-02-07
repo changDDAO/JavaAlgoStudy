@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class BinarySearch03 {
@@ -34,15 +35,50 @@ public class BinarySearch03 {
 
         arr = Stream.of(line).mapToInt(Integer::parseInt).toArray();
 
-        target = Collections.max(list);
+        list = (ArrayList<Integer>) Arrays.stream(arr).boxed().collect(Collectors.toList());
+
+        target = Collections.max(list); // 가장 긴 길이를 기준으로
+
+        System.out.println(binarySearch(0, target, M));
     }
 
-    public void recursive(int start, int end) {
-        int mid = (start - end) / 2;
+    public int binarySearch(int start, int end, int M) {
+        int mid;
+        int sum; // 남은 길이 총 합
+        int record = 0;
 
+        while (true) {
+            if (start > end)
+                break;
 
+            mid = (start + end) / 2;
 
+            sum = calLength(mid);
 
+            if (sum < M) { // 남은 길이의 합이 목표 값보다 작으면
+                end = mid - 1; // 이진 탐색을 좌측 구간 실행
+            }
+            else {
+                record = mid; // mid 값을 저장
+                start = mid + 1; // 이진 탐색 우측 구간 실행
+            }
+        }
+
+        return record;
+    }
+
+    public int calLength(int mid) { // 남은 길이 총 합 구하기
+        int result = 0;
+
+        for (int tmp : arr) {
+            int n = tmp - mid;
+
+            if (n > 0) {
+                result += n;
+            }
+        }
+
+        return result;
     }
 
 
