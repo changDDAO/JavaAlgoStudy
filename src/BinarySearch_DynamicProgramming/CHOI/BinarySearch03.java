@@ -17,7 +17,7 @@ public class BinarySearch03 {
 
     /*
         4 6
-        19 14 8 17
+        19 15 8 17
      */
 
     public BinarySearch03() throws IOException {
