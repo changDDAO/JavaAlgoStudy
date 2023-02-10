@@ -40,54 +40,9 @@ public class Sort {
             System.out.print(i + " ");
     }
 
-    public static void quick() { // 퀵 정렬
-        int[] list = ORIGINAL_LIST;
-
-        repeat(list, 0, list.length - 1);
-
-        for (int i : list)
-            System.out.print(i + " ");
-    }
-
-    public static void repeat(int[] temp, int start, int end) {
-        if (start >= end)
-            return;
-
-        int pivot = start;
-        int left = start + 1;
-        int right = end;
-
-        while (true) {
-            if (left > right)
-                break;
-
-            while (left <= end && temp[left] <= temp[pivot]) {
-                left++;
-            }
-
-            while (right > start && temp[right] >= temp[pivot]) {
-                right--;
-            }
-
-            if (left > right) {
-                temp[left] = swap(temp[right], temp[right] = temp[left]);
-            } else {
-                temp[right] = swap(temp[left], temp[left] = temp[right]);
-            }
-        }
-
-        repeat(temp, start, right - 1);
-        repeat(temp, right + 1, end);
-
-        for (int i : temp)
-            System.out.print(i + " ");
-
-    }
-
 
     public static void main(String[] args) {
-//        selection();
+        selection();
 //        insertion();
-        quick();
     }
 }
