@@ -28,11 +28,12 @@ public class Practice3_BiSearch {
         int end = (int)1e9; //10억
         int answer = 0;
         while (start <= end) {
-            long dduckSum = 0;
+
             int mid = (start+end)/2; // mid 값이 결국엔 찾을 h의 길이가 될것임.
-            for (int dduck : dduckList) {
+            long dduckSum = dduckList.stream().filter(b->(b>mid)).mapToInt(d->d-mid).sum();
+            /*for (int dduck : dduckList) {
                 if(dduck>mid) dduckSum += (dduck-mid); //떡리스트 순회하면서 떡의길이가 절단기 길이보다 길다면 잘라서 오른쪽부분을 합해준다
-                }
+                }*/
             if(dduckSum<m) end = mid-1;//목표하는양보다 오른쪽에 잘려진 떡의양이 작다면 절단기의 길이를 줄여 더많이 잘려지도록 해야한다.
             else{
                 answer = mid;// 절단기 길이의 최댓값을 출력하는 문제이므로 떡이 잘려진 오른쪽 부분의 합이 목표하는 양보다 크거나 같다면 h증가

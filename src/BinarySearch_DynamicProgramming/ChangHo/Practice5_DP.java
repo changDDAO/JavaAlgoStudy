@@ -33,7 +33,8 @@ public class Practice5_DP {
     public void bottomUp(){
         dpTable[0]=0;
         for (int unit : units) {//화폐단위를 하나씩 가져오면서
-            for (int j = unit; j < m; j++) {
+            for (int j = unit; j <= m; j++) {
+                if(dpTable[j-unit]!=INF)
                     dpTable[j] = Math.min(dpTable[j], dpTable[j - unit] + 1);//화폐단위를 바꿔가면서  dpTable을 최솟값으로 갱신
             }
         }

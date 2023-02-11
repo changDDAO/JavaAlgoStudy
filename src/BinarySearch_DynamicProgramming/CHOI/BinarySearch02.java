@@ -3,7 +3,6 @@ package BinarySearch_DynamicProgramming.CHOI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class BinarySearch02 {
@@ -19,7 +18,6 @@ public class BinarySearch02 {
         String[] line = s.split(" ");
 
         source = Stream.of(line).mapToInt(Integer::parseInt).toArray();
-        Arrays.sort(source);
 
         s = br.readLine();
         int M = Integer.parseInt(s);
@@ -31,7 +29,7 @@ public class BinarySearch02 {
         request = Stream.of(line).mapToInt(Integer::parseInt).toArray();
 
         for (int tmp : request) {
-            if (recursive(tmp, 0, source.length - 1))
+            if (recursive(tmp, 0, request.length))
                 System.out.print("yes ");
             else
                 System.out.print("no ");
