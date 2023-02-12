@@ -21,7 +21,6 @@ public class DP03 {
     // [i - 2] + storage[i] => 현재 저장고에서 2번째 전의 저장고까지 털었을 경우 현재 저장고를 털 수 있음
     public void run() {
         for (int i = 2; i < N + 1; i++) {
-
             mem[i] = Math.max(mem[i - 1], mem[i - 2] + storage[i - 1]); // 둘 중 최댓값을 저장
         }
     }

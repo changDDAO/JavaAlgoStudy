@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class DP05 {
-    private final int INF = 99999;
+    private final int INF = Integer.MAX_VALUE;
     private int[] mem; // 금액에 해당하는 최소 경우의 수
     private int[] wallet; // 가지고 있는 화폐
     private int N, M;
@@ -15,7 +15,10 @@ public class DP05 {
     public DP05() throws IOException {
         init();
         run();
-        System.out.println(mem[M]);
+        if (mem[M] == INF)
+            System.out.println(mem[M]);
+        else
+            System.out.println(-1);
     }
 
     public void init() throws IOException {
@@ -29,7 +32,7 @@ public class DP05 {
         mem = new int[M + 1];
         wallet = new int[N];
 
-        Arrays.fill(mem, INF); // 계산 못하는 금액은 -1
+        Arrays.fill(mem, INF);
 
         int pos;
 
