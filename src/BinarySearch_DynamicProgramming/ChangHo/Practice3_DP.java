@@ -9,7 +9,7 @@ public class Practice3_DP {
     //dp로 해결할 경우 점화식을 세우는것이 상당히 중요하다.
     //bottomUp 방식으로 식량의 합을 누적해간다고 가정하면 홀수또는 짝수번째 index만 각각 합산이 가능하다.
     //
-    private final int []dpTable = new int[100];
+    private final                   int []dpTable = new int[100];
     private int[] foods;
     private int n;
     public Practice3_DP() throws IOException {
