@@ -11,7 +11,7 @@ public class DP04 {
         init();
         run();
 
-        System.out.println(mem[N] % 796796);
+        System.out.println(mem[N]);
     }
 
     /*
@@ -29,7 +29,7 @@ public class DP04 {
         mem[2] = 3;
 
         for (int i = 3; i < N + 1; i++) {
-            mem[i] = mem[i - 1] + 2 * mem[i - 2];
+            mem[i] = (mem[i - 1] + 2 * mem[i - 2]) % 796796;
         }
     }
 
