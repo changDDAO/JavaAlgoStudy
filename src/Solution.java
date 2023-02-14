@@ -1,61 +1,97 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Solution {
-    int n, m;
-    public List<Integer> dduckList;
+public static class Node implements Comparable<Node>{
+    int index;
+    int distance;
 
-    public Solution() throws IOException {
-        input();
-        int answer = searchH(m);
-        System.out.println(answer);
+    public Node(int index, int distance) {
+        this.index = index;
+        this.distance = distance;
     }
 
-    public void input() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s = br.readLine();
-        StringTokenizer st = new StringTokenizer(s);
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
-        s = br.readLine();
-        String[] dducks = s.split(" ");
-        dduckList = Arrays.stream(dducks).mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
-
+    public int getIndex() {
+        return index;
     }
 
-    public int getDduckSum(int mid) {
-        int dducksum = 0;
-        for (int dduckLen : dduckList) {
-            if (dduckLen > mid) {
-                dducksum += (dduckLen - mid);
+    public int getDistance() {
+        return distance;
+    }
+
+    @Override
+    public int compareTo(Node o) {
+        return this.distance-o.distance;
+    }
+}
+public static int n, m, start;
+public static ArrayList<ArrayList<Node>>graph = new ArrayList<>();
+
+public static int []dpTable = new int[100001];
+public static final int INF = Integer.MAX_VALUE;
+
+public static void dijkstra(int start) {
+    PriorityQueue<Node> pq = new PriorityQueue<>();
+    pq.add(new Node(start, 0));
+    dpTable[start]=0;
+    while (!pq.isEmpty()) {
+        Node node = pq.poll();
+        int dis = node.getDistance();
+        int curNum = node.getIndex();
+        if(dpTable[curNum]<dis) continue;
+        for (int i = 0; i < graph.get(curNum).size(); i++) {
+            //거쳐가는 경우의 비용
+            int cost = dpTable[curNum]+graph.get(curNum).get(i).distance;
+            if(cost<dpTable[graph.get(curNum).get(i).getIndex()]) {
+                dpTable[graph.get(curNum).get(i).getIndex()] = cost;
+                pq.add(new Node(graph.get(curNum).get(i).getIndex(), cost));
             }
         }
-        return dducksum;
 
     }
+}
 
-    public int searchH(int m) {
-        int start = 0;
-        int h = 0;
-        int end = (int) 1e9;
-        while (start <= end) {
-            int mid = (start + end) / 2;
-            int dduckSum = getDduckSum(mid);
-            if (dduckSum < m)
-                end = mid - 1;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        n = sc.nextInt();
+        m = sc.nextInt();
+        start = sc.nextInt();
+
+        // 그래프 초기화
+        for (int i = 0; i <= n; i++) {
+            graph.add(new ArrayList<Node>());
+        }
+
+        // 모든 간선 정보를 입력받기
+        for (int i = 0; i < m; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int c = sc.nextInt();
+            // a번 노드에서 b번 노드로 가는 비용이 c라는 의미
+            graph.get(a).add(new Node(b, c));
+        }
+
+        // 최단 거리 테이블을 모두 무한으로 초기화
+        Arrays.fill(dpTable, INF);
+
+        // 다익스트라 알고리즘을 수행
+        dijkstra(start);
+
+        // 모든 노드로 가기 위한 최단 거리를 출력
+        for (int i = 1; i <= n; i++) {
+            // 도달할 수 없는 경우, 무한(INFINITY)이라고 출력
+            if (dpTable[i] == INF) {
+                System.out.println("INFINITY");
+            }
+            // 도달할 수 있는 경우 거리를 출력
             else {
-                h = mid;
-                start = mid + 1;
+                System.out.println(dpTable[i]);
             }
         }
-        return h;
     }
-    public static void main(String[] args) throws IOException {
-        new Solution();
-    }
+
 }
