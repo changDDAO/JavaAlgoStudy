@@ -5,12 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.PriorityQueue;
 import java.util.stream.Stream;
 
-
-
-public class Dijkstra {
-    private class Node {
+public class ImprovedDijkstra {
+    private class Node implements Comparable<Node> {
         private int idx; // 목적지
         private int distance; // 비용
 
@@ -26,28 +25,31 @@ public class Dijkstra {
         public int getDistance() {
             return distance;
         }
+
+        @Override
+        public int compareTo(Node o) {
+            return this.distance - o.distance;
+        }
     }
 
     private int N, M, start;
     private final int INF = Integer.MAX_VALUE;
     private int[] distance = new int[100001];
-    private boolean[] visited = new boolean[100001];
-    private ArrayList<ArrayList<Node>> graph;
+    private ArrayList<ArrayList<Node>> graph = new ArrayList<>();
 
-    public Dijkstra() throws IOException {
-
+    public ImprovedDijkstra() throws IOException {
         init();
         run(start);
 
         for (int i = 1; i <= N; i++) {
             if (distance[i] == INF)
                 System.out.println("INFINITY");
-
-            System.out.println(distance[i]);
+            else
+                System.out.println(distance[i]);
         }
     }
 
-    public void init() throws IOException {
+    private void init() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String s = br.readLine();
@@ -74,47 +76,36 @@ public class Dijkstra {
         Arrays.fill(distance, INF);
     }
 
-    public void run(int start) {
-        distance[start] = 0;
-        visited[start] = true;
+    private void run(int start) {
+        PriorityQueue<Node> pq = new PriorityQueue<>();
 
-        // 각 노드까지의 거리(비용) 저장
-        for (int i = 0; i < graph.get(start).size(); i++) {
-            Node next = graph.get(start).get(i); // 연결된 다음 노드
-            distance[next.getIdx()] = next.getDistance(); // 비용 저장
-        }
+        pq.offer(new Node(start, 0));
+        distance[start] = 0;
 
         int now;
         int cost;
-        for (int i = 0; i < N - 1; i++) {
-            now = getSmallNode();
-            visited[now] = true;
+        while (!pq.isEmpty()) {
+            Node node = pq.poll();
 
-            for (int j = 0; j < graph.get(now).size(); j++) {
-                Node next = graph.get(now).get(j);
-                cost = distance[now] + next.getDistance();
+            now = node.getIdx();
+            cost = node.getDistance();
 
-                if (cost < distance[next.getIdx()]) // 비용 갱신
-                    distance[next.getIdx()] = cost;
+            if (distance[now] < cost)
+                continue;
+
+            for (int i = 0; i < graph.get(now).size(); i++) {
+                int tmp = distance[now] + graph.get(now).get(i).getDistance();
+
+                if (distance[graph.get(now).get(i).getIdx()] > tmp) {
+                    distance[graph.get(now).get(i).getIdx()] = tmp;
+                    pq.offer(new Node(graph.get(now).get(i).getIdx(), tmp));
+                }
             }
         }
-    }
-
-    public int getSmallNode() { // 가장 가까운 노드 찾기
-        int min = INF;
-        int idx = 0;
-
-        for (int i = 1; i <= N; i++) {
-            if (distance[i] < min && !visited[i]) { // 방문하지 않은 노드 중 제일 적은 거리(비용)을 가진 노드 찾기
-                min = distance[i];
-                idx = i;
-            }
-        }
-
-        return idx;
     }
 
     public static void main(String[] args) throws IOException {
-        new Dijkstra();
+        new ImprovedDijkstra();
     }
 }
+
